@@ -36,6 +36,22 @@
 			<td> <a href="obs_playback.php">SELECT</a>
 			</td>
 		</tr>
+		<tr>  <!-- this table will be populated with data from sql query -->
+			<td> Annie Instructor
+			</td>
+			<td> Timothy Teacher
+			</td>
+			<td> 9/22/2016
+			</td>
+			<td> 5
+			</td>
+			<td> Rating
+			</td>
+			<td> 42:29:00
+			</td>
+			<td> <a href="obs_playback.php">SELECT</a>
+			</td>
+		</tr>
 	</table> 
 	</div> <!-- rounded_corners -->
   </div> <!-- menu -->
