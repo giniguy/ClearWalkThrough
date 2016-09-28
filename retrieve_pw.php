@@ -1,2 +1,2 @@
-Query the database and send password then 
+Send password reset link then
 <a href="index.php">Return to login page </a>

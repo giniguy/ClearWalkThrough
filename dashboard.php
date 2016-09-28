@@ -30,10 +30,10 @@
 
 </div>  <!-- content -->
 
-<div class="footer">
+	<div class="footer">
 		<?php include "footer.php" 
 		?>
-</div>  <!-- footer -->
+	</div>  <!-- footer -->
 </div>  <!-- wrapper -->
 </body>
 </html>

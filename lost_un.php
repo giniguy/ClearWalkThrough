@@ -13,17 +13,15 @@
 
 <div class="content">
 	<div class="loginformlayout">
-	<form method="POST" action="login_check.php">
-		<label> User Name: 
+	<form method="POST" action="retrieve_un.php">
+		<p> Forgot your username? <br> Enter your email below. <br> An email will be sent to you with login information.
+		</p> <br>
+		<label> Email address: 
 		</label>
-		<input id="username" name="username"> 
-		</input> <br>
-		<label> Password: 
-		</label>
-		<input type="password" name="password">  <!-- this needs to be encrypted on Submit -->
+		<input id="email" name="email"> 
 		</input> <br>
 		<label> </label>
-		<input type="submit" value="Login">
+		<input type="submit" value="Submit">
 	</form>
 	</div> <!-- loginformlayout -->
 

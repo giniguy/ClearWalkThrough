@@ -1,29 +1,27 @@
 <html>
 <head>
-	<title>Dashboard</title>
+	<title>Clear Walk Through</title>
 	<link href="cwtstyle.css" type="text/css" rel="stylesheet" />
-	<link href="images/favicon.ico" type="image/gif" rel="icon" />
+	<link href="favicon.ico" type="image/gif" rel="icon" />
 </head>
 
 <body>
-<div id="wrapper">
-<div id="header">
+<div class="wrapper">
+<div class="header">
 <?php
-	require_once "nav.php";
+	require_once "nav.php";   // replace with banner on account pages 
 ?>
 </div> <!-- header -->
 
-<div id="content">
+<div class="content">
 
-	<div id="dashboard">
-
-	</div> <!-- dashboard -->
 
 </div>  <!-- content -->
 
-	<div id="footer">
-	<div class="centered"><a href="about.php"> About </a> &nbsp; | &nbsp; &copy; Copyright Clear Walk Through 2016 </div>
-	</div>  <!-- footer -->
+<div class="footer">
+	<?php include "footer.php" 
+	?>
+</div>  <!-- footer -->
 </div>  <!-- wrapper -->
 </body>
 </html>
