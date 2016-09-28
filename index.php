@@ -20,7 +20,7 @@
 		</input> <br>
 		<label> Password: 
 		</label>
-		<input id="password" name="password">  <!-- this needs to be encrypted on Submit -->
+		<input type="password" name="password">  <!-- this needs to be encrypted on Submit -->
 		</input> <br>
 		<label> </label>
 		<input type="submit" value="Login">
