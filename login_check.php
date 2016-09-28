@@ -1,1 +1,1 @@
-After successful login, this page redirects to <a href="dashboard.php"> the dashboard </a>
+php script queries database and verifies user credentials then redirects to <a href="dashboard.php"> the dashboard </a>
