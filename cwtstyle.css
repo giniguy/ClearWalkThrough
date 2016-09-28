@@ -1,5 +1,5 @@
 
-input {
+input, select {
 	font-size: 16px;
 }
 
@@ -207,8 +207,6 @@ td {
 #dashboard {
 	height: 400px;
 	width: 99%;
-	border-style: solid;
-	border-width: 1px;
 }
 
 #dashbd-menu {
@@ -248,3 +246,18 @@ td {
 	font-size: 14px;
 }
 
+#video {
+	float: left;
+	margin: 30px;
+}
+
+#comments {
+	float: left;
+	margin: 30px 0;
+	width: 400px;
+	height: 315px;
+}
+#right {
+	text-align: right;
+	width: 95%;
+}

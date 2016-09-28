@@ -1,2 +1,2 @@
-This page intentionally left blank.
-<a href="index.php">Return to login page </a>
+This page will display a user signup form, create user and direct to 
+<a href="dashboard.php"> User Dashboard </a>

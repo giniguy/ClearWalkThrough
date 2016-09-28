@@ -9,7 +9,9 @@
 	<div class="listhead rounded_corners">
 		My Observations
 	</div> <!-- listhead -->
-	
+
+<!-- each of the links in the menu will display the dashboard 
+		with observations populated from the database based on a query -->
 	<div class="list">
 		<ul>
 		 <li> <a href=""> as Teacher </a> </li>
