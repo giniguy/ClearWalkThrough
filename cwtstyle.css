@@ -16,13 +16,13 @@ br
 	clear: left;
 }
 
-ul {
-	list-style-type: none;
-	margin: -10px 0 15px 0;
+a:link {
+	text-decoration: none;
+	color: #000066;
 }
 
-li {
-	margin: 10px 0;
+a:visited {
+	color: #000066;
 }
 
 table {
@@ -34,10 +34,6 @@ th {
 	color: #e1e1e1;
 	padding: 7px;
 	font-size: 16px;
-}
-.th1 {
-	background-color: #5f5f5f;
-	color: #e1e1e1;
 }
 
 tr {   
@@ -70,13 +66,13 @@ td {
   display: inline-block;
   width: 175px;
   padding: 5px 17px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #000;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border-style: solid;
   border: 1px;
   border-radius: 8px;
@@ -84,13 +80,12 @@ td {
 }
 
 .obs_button:hover {
-	background-color: #5f5f5f;
+	background-color: #afafaf;
 }
 
 .obs_button:active {
   background-color: #f5f5f5;
   box-shadow: 0 2px #666;
-  transform: translateY(4px);
 }
 
 .centered {
@@ -208,11 +203,12 @@ td {
 #dashboard {
 	height: 400px;
 	width: 99%;
+	font-size: 12px;
 }
 
 #dashbd-menu {
 	float: left;
-	margin-left: 20px;
+	margin-left: 20px;  
 	margin-top: 20px;
 	width: 175px;
 }
@@ -226,10 +222,8 @@ td {
 .listhead {
 	text-align: center;
 	padding: 7px 0px;  
-	background-color: blue;
 	background-color: #000066;
-	color: #e1e1e1;
-	width: 174px;
+	color: #e1e1e1;	
 }
 
 .rounded_corners {
@@ -237,7 +231,23 @@ td {
 	border-width: 1px;
 	border-radius: 8px;
 	width: 175px;
-	margin-bottom: 15px;
+	margin-bottom: 5px; 
+}
+
+.list {
+	display: block;
+	text-align: center;
+	padding: 5px 0;  
+	width: 174px;
+}
+
+.active {
+	background-color: white;
+	color: #cc0000;
+}
+
+.list:hover:not(.active) {   
+	background-color: #afafaf;
 }
 
 }
@@ -247,18 +257,71 @@ td {
 	font-size: 14px;
 }
 
+#selector {
+	margin: auto;
+	width: 75%;
+	border: 1px solid #5f5f5f;
+}
+
 #video {
 	float: left;
-	margin: 30px;
+	width: 30%;
+	height: 400px;
 }
 
 #comments {
 	float: left;
-	margin: 30px 0;
-	width: 400px;
-	height: 315px;
+	width: 20%;
+	height: 400px;
+	border: 1px solid #5f5f5f;
 }
+
+#domain_selector {
+	float: left;
+	width: 45%;
+	margin: 10px 20px;
+}
+
+#comment_display {
+	float: left;
+	margin: 10px 20px;
+}
+
 #right {
 	text-align: right;
-	width: 95%;
+}
+
+.domain {
+	display: none;
+	float: left;
+		margin: 10px 10px;
+}
+
+.behavior {
+	display: none;
+	float: left;
+		margin: 10px 10px;
+}
+
+/* tab menu styles for observation selectors */
+.tabmenu li {
+    float: left;
+	list-style-type: none;
+	font-size: 12px;
+}
+
+.tabmenu a {
+	display: block;
+	padding: 8px;
+	background-color: white;
+	outline: 1px #111 solid;
+}
+
+.tabmenu li a:hover:not(.active) {
+	background-color: #afafaf;
+}
+
+.tabmenu .active {
+	background-color: #000066;
+	color: white;
 }
