@@ -1,8 +1,0 @@
-heroku SQL settings
-
-DB_HOST: us-cdbr-iron-east-04.cleardb.net
-DB_DATABASE: heroku_912aebf8b73e1cb
-DB_USERNAME: b318bad12b27a3
-DB_PASSWORD: 9f921efe
-
-
