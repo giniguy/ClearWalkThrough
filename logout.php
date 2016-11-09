@@ -1,2 +1,7 @@
-php script will end the session and log the user out <br />
-then return to <a href="index.php"> the login page </a>
+<?php
+//logout and destroy session
+
+session_start();
+session_destroy();
+header("Location:index.php");
+?>

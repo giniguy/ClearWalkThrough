@@ -31,7 +31,7 @@
 			</td>
 			<td> 3
 			</td>
-			<td> <img src="images/star5.png">
+			<td> <img src="images/star3_5.png">
 			</td>
 			<td> 07:19:58
 			</td>
@@ -56,7 +56,4 @@
 		</tr>
 	</table> 
 	</div> <!-- rounded_corners -->
-  </div> <!-- menu -->
-</html>
-<?php
-?>
+  </div> <!-- table_corners -->

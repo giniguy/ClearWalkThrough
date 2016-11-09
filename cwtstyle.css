@@ -123,49 +123,50 @@ td {
     position: absolute;
     bottom: 0%;  
     left: 0;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: black;
+	font-size: 14px;
+	background-color: #E1E1E1;
 }
 
-.loginformlayout {
-	margin-left: 420px;
-	padding-top: 20px;
-	width: 700px;
+fieldset {
+	margin-left: auto; margin-right: auto;
+	width: 750px;
+	border: 0px;
+	padding-bottom: 40px;
 }
 
-.loginformlayout label
-{
-	display: block;
-	width: 120px;
+label.formheading {
 	float: left;
-	margin-bottom: 10px;
-	font-size: 16px;
+	margin-right: 1em;
 	text-align: right;
-	padding-right: 20px;
-}
-
-.loginoptionlayout {
-	margin-left: 420px;
-	padding-top: 30px;
-	width: 700px;
-}
-
-.loginoptionlayout label
-{
-	display: block;
 	width: 200px;
+	padding: 5px;
+}
+.error {
+	padding:10px;
+	color:red;
+	text-decoration:italic;
+}
+.message {
+	margin-left: auto; margin-right: auto;
+	width: 750px;
+	border: 0px;
+	padding: 15px 0px;
+	font-weight: bold;
+	color: #333333;
+}
+
+input[type="submit"] {
+	font-weight: bold;
+	margin-left: 260px;
+}
+label.columnright
+{
+	width: 200px;
+	padding: 5px;
 	float: left;
 	margin-bottom: 10px;
-	font-size: 16px;
-	text-align: right;
-	padding-right: 20px;
-}
-
-.loginoptionlayout .columnright
-{
-	display: block;
-	width: 200px;
-	float: left;
-	margin-bottom: 10px;
-	font-size: 16px;
 	text-align: left;
 }
 

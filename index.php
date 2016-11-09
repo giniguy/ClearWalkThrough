@@ -1,3 +1,32 @@
+<?php
+session_start();
+ if (!isset($_SESSION['presets'])) {
+	$_SESSION['presets'] = array('firstname' => "",
+							'lastname' => "",
+							'email' => "",
+							'email2' => "",
+							'username' => ""
+							);
+ } 
+ if (!isset($_SESSION['errors'])) {
+	$_SESSION['errors'] = array('firstnameError' => "",
+							'lastnameError' => "",
+							'emailError' => "",
+							'email2Error' => "",
+							'usernameError' => "",
+							'passwordError' => ""
+							);
+ } 
+ if (!isset($_SESSION['messages'])) {
+	$_SESSION['messages'] = array('userInfo' => "",
+							'emailNotFound' => ""
+							);
+ } 
+ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
+	 header("Location:dashboard.php");
+ }
+ ?>
+
 <html>
 <head>
 	<title>Clear Walk Through</title>
@@ -12,34 +41,29 @@
 </div> <!-- header -->
 
 <div class="content">
-	<div class="loginformlayout">
-	<form method="POST" action="login_check.php">
-		<label> User Name: 
-		</label>
-		<input id="username" name="username"> 
+	<div>
+	  <div class="message"><?php echo $_SESSION['messages']['userInfo']; 
+		// clear userInfo message
+	  $_SESSION['messages']['userInfo'] = '';?>
+	  </div>
+	
+	<form method="POST" action="handlers/login_handler.php">
+	  <fieldset>
+		<label class="formheading" for="username"> User Name: </label>
+		<input type="text" id="username" name="username" autofocus> </input> <br>
+		<label class="formheading" for="password"> Password: </label>
+		<input type="password" id="password" name="password"> 
 		</input> <br>
-		<label> Password: 
-		</label>
-		<input type="password" name="password">  <!-- this needs to be encrypted on Submit -->
-		</input> <br>
-		<label> </label>
 		<input type="submit" value="Login">
+	  </fieldset>
 	</form>
-	</div> <!-- loginformlayout -->
-
-	<div class="loginoptionlayout">
-		<label> Don't have an account?
-		</label>
-			<div class="columnright"> <a href="signup.php"> Click here to sign up </a>
-			</div> <br>
-		<label> Trouble logging in? 
-		</label>
-			<div class="columnright"> <a href="lost_un.php"> Forgot user name </a>
-			</div> <br>
-		<label> </label>
-			<div class="columnright">
-				<a href="lost_pw.php"> Forgot password </a>
-			</div>
+	</div> <!-- loginform -->
+	<fieldset>
+		<label class="formheading"> Don't have an account? </label>
+			<label class="columnright"> <a href="signup.php"> Click here to sign up </a>
+			</label> <br>
+		<label class="formheading"> Trouble logging in? </label>
+			<label class="columnright"> <a href="login_reset.php"> Click here for help </a>
 	</div> <!-- loginoptionlayout -->
 </div>  <!-- content -->
 

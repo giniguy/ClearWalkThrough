@@ -35,6 +35,4 @@
 	
 	</div> <!-- rounded_corners -->
   </div> <!-- menu -->
-</html>
-<?php
-?>
+

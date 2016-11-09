@@ -1,3 +1,10 @@
+<?php
+session_start();
+ if (!isset($_SESSION['authenticated']) || !($_SESSION['authenticated'])) {
+	 header("Location:index.php");
+ }
+?>
+
 <html>
 <head>
 	<title>Dashboard</title>
@@ -16,24 +23,18 @@
 <div class="content">
 	<div id="dashboard">
 		<div id="dashbd-menu">
-			<?php
-				require_once "dashbd_menu.php";
-			?>
+			<?php require_once "dashbd_menu.php"; ?>
 		</div> <!-- dashbd-menu -->
 		<div id="dashbd-table">
-			<?php
-				require_once "dashbd_table.php";
-			?>
+			<?php require_once "dashbd_table.php"; ?>
 		</div> <!-- dashbd-table -->
-
 	</div> <!-- dashboard -->
 
 </div>  <!-- content -->
-
 	<div class="footer">
-		<?php include "footer.php" 
-		?>
+		<?php require_once "footer.php" ?>
 	</div>  <!-- footer -->
+
 </div>  <!-- wrapper -->
 </body>
 </html>

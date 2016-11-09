@@ -1,4 +1,6 @@
-
+<?php 
+session_start();
+?>
 <html>
 <head>
 	<title>Observation Playback</title>
@@ -28,7 +30,7 @@ function openDomain(domainName) {
 	<div id="right"> <a href="dashboard.php"> <-- Back to Dashboard </a>
 		</div>
 	<div id="selector" > <form method="post" action=""> 
-		<select name="teachers">
+		<select name="teachers">   <!-- user datalist? -->
 			<option value="">Select Teacher</option>
 			<option value="Teacher">Timothy Teacher</option>
 			<option value="Instructor">Annie Instructor</option>
