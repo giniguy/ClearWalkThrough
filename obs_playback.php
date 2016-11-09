@@ -1,5 +1,6 @@
 <?php
 session_start();
+$obsID = $_GET['obsID'];
 ?>
 
 <html>
@@ -22,8 +23,8 @@ session_start();
 		</div>
 	<div id="dashboard">
 		<div id="video">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/K7Hn1rPQouU" frameborder="0" allowfullscreen></iframe>
-		</div> <!-- video -->
+			Details of observation # <?php echo $obsID; ?> will be retrieved from database and displayed.
+		</div> 
 		<div id="comments">
 			Comments will display here
 		</div> <!-- comments -->
