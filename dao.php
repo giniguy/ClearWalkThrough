@@ -113,4 +113,11 @@ public function updateLastLogin($username) {
 	$q->execute();
 } // end updateLastLogin
 
+public function getTchrObservation($userID) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM observations 
+		JOIN users ON observer = userID 
+		 WHERE teacher = '$userID'");			
+} // end getTchrObservation
+
 }  //end Dao

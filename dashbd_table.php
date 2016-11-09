@@ -1,14 +1,15 @@
 <?php
+require "dao.php";
 ?>
 <html>
 	<div class="table_corners">
 	<table>
-		<th class="rounded_corners" colspan="7">Observations List</th>
+		<th class="rounded_corners" colspan="6">Observations List</th>
 	</table>
 	<table>
 		<tr> 
-			<th> Teacher
-			</th>
+<!-- 			<th> Teacher
+			</th> -->
 			<th> Observer
 			</th>
 			<th> Date
@@ -22,38 +23,33 @@
 			<th> View
 			</th>
 		</tr>
-		<tr>  <!-- this table will be populated with data from sql query -->
-			<td> Timothy Teacher
+<?php 
+// get data from db
+$userID = $_SESSION['user']['userID'];
+$dao = new dao();
+$rows = $dao -> getTchrObservation($userID);
+	foreach ($rows as $row) {
+?>
+		<tr>  
+<!-- 			<td> <?php echo $row["firstname"];?> <?php echo $row["lastname"];?>
+			</td> -->
+			<td> <?php echo $row["firstname"];?> <?php echo $row["lastname"];?>
 			</td>
-			<td> Mike Principal
+			<td> <?php echo $row["obsDate"]; ?>
 			</td>
-			<td> 9/15/2016
+			<td> <?php echo $row["classPeriod"]; ?>
 			</td>
-			<td> 3
+			<td> <?php $rating = $row["rating"]; 
+				$stars = str_replace(".","_",$rating); ?>
+				<img src="images/star<?php echo $stars;?>.png"> 
 			</td>
-			<td> <img src="images/star3_5.png">
+			<td> <?php echo $row["obsLength"]; ?>
 			</td>
-			<td> 07:19:58
-			</td>
-			<td> <a href="obs_playback.php"><img src="images/play.png"></a>
-			</td>
-		</tr>
-		<tr>  <!-- this table will be populated with data from sql query -->
-			<td> Timothy Teacher
-			</td>
-			<td> Annie Instructor
-			</td>
-			<td> 9/22/2016
-			</td>
-			<td> 5
-			</td>
-			<td> <img src="images/star1.png">
-			</td>
-			<td> 42:29:00
-			</td>
-			<td> <a href="obs_playback.php"><img src="images/play.png"></a>
+			<td> <a href="obs_playback.php?<?php echo $row["obsID"]; ?>"><img src="images/play.png"></a>
 			</td>
 		</tr>
+	<?php  }  // end foreach  
+	?>
 	</table> 
 	</div> <!-- rounded_corners -->
   </div> <!-- table_corners -->
