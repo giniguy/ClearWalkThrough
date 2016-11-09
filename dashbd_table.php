@@ -45,7 +45,7 @@ $rows = $dao -> getTchrObservation($userID);
 			</td>
 			<td> <?php echo $row["obsLength"]; ?>
 			</td>
-			<td> <a href="obs_playback.php?<?php echo $row["obsID"]; ?>"><img src="images/play.png"></a>
+			<td> <a href="obs_playback.php?obsID=<?php echo $row["obsID"]; ?>"><img src="images/play.png"></a>
 			</td>
 		</tr>
 	<?php  }  // end foreach  
