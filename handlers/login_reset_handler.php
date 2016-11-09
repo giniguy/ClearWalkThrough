@@ -3,7 +3,7 @@
 
 session_start();
 require "../dao.php";
-require "sendgrid-php/sendgrid-php.php"   // for email service on Heroku
+//require "sendgrid-php/sendgrid-php.php"   // for email service on Heroku
 
 // email from login_reset form
 $email = $_POST['email'];
