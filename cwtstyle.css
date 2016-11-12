@@ -240,12 +240,12 @@ label.columnright
 	text-align: center;
 	padding: 5px 0;  
 	width: 174px;
+	cursor:pointer;
 }
 
 .active {
 	background-color: white;
 	color: #cc0000;
-	cursor:pointer;
 }
 
 .list:hover:not(.active) {   
