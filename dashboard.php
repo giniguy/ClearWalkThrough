@@ -10,6 +10,26 @@ session_start();
 	<title>Dashboard</title>
 	<link href="cwtstyle.css" type="text/css" rel="stylesheet" />
 	<link href="favicon.ico" type="image/gif" rel="icon" />
+	<script src="js/jquery.min.js"></script>
+	<script> 
+		$(document).ready(function(){
+		  $("#teacher").click(function(){
+			$("#dashbd-table").load("dashbd_table.php?role=Tchr");
+			$(".list").removeClass("active");
+			$("#teacher").addClass("active");
+		  });
+		});
+	</script>
+	<script> 
+		$(document).ready(function(){
+		  $("#observer").click(function(){
+			$("#dashbd-table").load("dashbd_table.php?role=Obsvr");
+			$(".list").removeClass("active");
+			$("#observer").addClass("active");
+		  });
+		});
+	</script>
+
 </head>
 
 <body>
@@ -23,10 +43,37 @@ session_start();
 <div class="content">
 	<div id="dashboard">
 		<div id="dashbd-menu">
-			<?php require_once "dashbd_menu.php"; ?>
+	<form action="obs_recorder.php">
+		<button class="obs_button">NEW Observation</button>
+	</form>
+<div class="rounded_corners">
+	<div class="listhead rounded_corners">
+		My Observations
+	</div> <!-- listhead -->
+	<div id="teacher" class="list">
+		as Teacher
+	</div> <!-- list -->
+	<div id="observer" class="list"> 
+		 as Observer 
+	</div> <!-- list -->
+</div>  <!-- rounded_corners -->
+	
+	<div class="rounded_corners">
+	<div class="listhead rounded_corners">
+		Other Observations
+	</div> <!-- listhead -->
+	<a href=""> <div class="list">
+		Shared with me 
+	</div> </a> <!-- list -->
+	<a href=""><div class="list"> 
+		 Recommended 
+	</div> </a><!-- list -->
+	
+	</div> <!-- rounded_corners -->
+
 		</div> <!-- dashbd-menu -->
 		<div id="dashbd-table">
-			<?php require_once "dashbd_table.php"; ?>
+			<?php // require_once "dashbd_table.php"; ?> 
 		</div> <!-- dashbd-table -->
 	</div> <!-- dashboard -->
 

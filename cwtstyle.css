@@ -33,7 +33,6 @@ th {
 	background-color: #000066;
 	color: #e1e1e1;
 	padding: 7px;
-	font-size: 16px;
 }
 
 tr {   
@@ -114,7 +113,7 @@ td {
 
 .content {
 	overflow: auto;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .footer {
@@ -204,7 +203,7 @@ label.columnright
 #dashboard {
 	height: 400px;
 	width: 99%;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 #dashbd-menu {
@@ -225,6 +224,7 @@ label.columnright
 	padding: 7px 0px;  
 	background-color: #000066;
 	color: #e1e1e1;	
+	
 }
 
 .rounded_corners {

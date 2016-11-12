@@ -1,5 +1,10 @@
 <?php
+session_start();
 require "dao.php";
+$userID = $_SESSION['user']['userID'];
+$getFunction = "This is the function";
+$role = $_GET['role'];
+	
 ?>
 <html>
 	<div class="table_corners">
@@ -7,32 +12,36 @@ require "dao.php";
 		<th class="rounded_corners" colspan="6">Observations List</th>
 	</table>
 	<table>
-		<tr> 
-<!-- 			<th> Teacher
-			</th> -->
-			<th> Observer
-			</th>
-			<th> Date
-			</th>
-			<th> Per
-			</th>
-			<th> Rating
-			</th>
-			<th> Length
-			</th>
-			<th> View
-			</th>
-		</tr>
-<?php 
+<?php
 // get data from db
-$userID = $_SESSION['user']['userID'];
 $dao = new dao();
-$rows = $dao -> getTchrObservation($userID);
+if ($role=='Tchr') {$rows = $dao -> getTchrObservation($userID);
+		?><tr> 
+ 			<th> Teacher </th> 
+			<th> Observer </th>
+			<th> Date </th>
+			<th> Per </th>
+			<th> Rating </th>
+			<th> Length </th>
+			<th> View </th>
+		</tr>
+<?php }
+if ($role=='Obsvr') {$rows = $dao -> getObsvrObservation($userID);
+		?><tr> 
+ 			<th> Observer </th> 
+			<th> Teacher </th>
+			<th> Date </th>
+			<th> Per </th>
+			<th> Rating </th>
+			<th> Length </th>
+			<th> View </th>
+		</tr>
+<?php }
 	foreach ($rows as $row) {
 ?>
 		<tr>  
-<!-- 			<td> <?php echo $row["firstname"];?> <?php echo $row["lastname"];?>
-			</td> -->
+ 			<td> <?php echo $_SESSION['user']['firstname'];?> <?php echo $_SESSION['user']['lastname'];?>
+			</td> 
 			<td> <?php echo $row["firstname"];?> <?php echo $row["lastname"];?>
 			</td>
 			<td> <?php echo $row["obsDate"]; ?>

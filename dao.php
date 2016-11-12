@@ -120,4 +120,12 @@ public function getTchrObservation($userID) {
 		 WHERE teacher = '$userID'");			
 } // end getTchrObservation
 
+public function getObsvrObservation($userID) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM observations 
+		JOIN users ON teacher = userID 
+		 WHERE observer = '$userID'");			
+} // end getObsvrObservation
+
+
 }  //end Dao
