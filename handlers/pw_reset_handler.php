@@ -3,12 +3,13 @@
 
 session_start();
 require "../dao.php";
-
+$xID = $_GET['ID'];
 $errors = false;
-$email = $_SESSION['presets']['email'];
-	//clear presets email
-	$_SESSION['presets']['email'] = '';
 $dao = new dao();
+
+//clear presets email
+//	$_SESSION['presets']['email'] = '';
+
 
 // check new password length
 $password = $_POST['password'];
@@ -17,7 +18,7 @@ $password = $_POST['password'];
 // bad password; retry
 	IF ($errors)	{
 	$_SESSION['errors']['passwordError'] = $passwordError;
-	header("Location:../pw_reset.php?email=$email");
+	header("Location:../pw_reset.php?ID=$xID");
 	} else {
 // check passwords match
 $password2 = $_POST['password2'];
@@ -26,11 +27,10 @@ $password2 = $_POST['password2'];
 	} // password error; retry
 	IF ($errors)	{
 	$_SESSION['errors']['passwordError'] = $passwordError;
-	header("Location:../pw_reset.php?email=$email");
+	header("Location:../pw_reset.php?ID=$xID");
 } else {
-  // good password; update user password
-$dao -> updatePassword($email, $password);
-	  $_SESSION['messages']['userInfo'] = 'Your password has been reset. Please login.';
-header("Location:../index.php");
-
-}
+  // good password; update user password 
+		$dao -> updatePassword($xID, $password);
+			  $_SESSION['messages']['userInfo'] = 'Your password has been reset. Please login.';
+		header("Location:../index.php");
+} // end else
