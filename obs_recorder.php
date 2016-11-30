@@ -73,7 +73,7 @@ function openBehavior(behaviorName) {
 	<form method="post" action="handlers/begin_recording_handler.php"> 
 		<label class="selector">Teacher: </label>
 		<select name="teacher">   
-		<option value="0">Select . . .</option>
+			<option value="0">Select . . .</option>
 			<?php 	// get teachers from db to populate selector
 				$teachers = $dao -> getTeachers($_SESSION['user']['userID']);  // pass logged in user to function so it will be omitted from list
 				foreach ($teachers as $teacher) {
@@ -81,13 +81,24 @@ function openBehavior(behaviorName) {
 					$firstname = $teacher["firstname"];
 					$lastname = $teacher["lastname"];
 			?>
-		<option value="<?php echo $ID; ?>"><?php echo $firstname; echo" "; echo $lastname;?></option>
+			<option value="<?php echo $ID; ?>"><?php echo $firstname; echo" "; echo $lastname;?></option>
 			<?php	} // end foreach 	?>
 		</select>
 		<label class="selector">Date of Observation: </label>
-		<input type="date" size="6" name="date"/>
+			<input type="date" size="6" name="date"/>
 		<label class="selector">Class Period: </label>
-		<input type="text" name="period" size="1"/>
+		<select name="period">   
+			<option value="">Select . . .</option>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
 		<button id="submit" class="obs_start">Begin Recording</button>	
 	</form>
 	</div> 
