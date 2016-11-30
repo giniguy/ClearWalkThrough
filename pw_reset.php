@@ -1,6 +1,9 @@
 <?php 
 session_start();
-$_SESSION['presets']['email'] = $_GET['email'];
+require "dao.php";
+$dao = new dao();
+$xID = $_GET['ID'];
+
 ?>
 <html>
 <head>
@@ -18,7 +21,7 @@ $_SESSION['presets']['email'] = $_GET['email'];
 <div class="content">
 	<div>
 	<fieldset>
-	  <form method="POST" action="handlers/pw_reset_handler.php">
+	  <form method="POST" action="handlers/pw_reset_handler.php?ID=<?php echo $xID?>">
 		<p><span class="error">Forgot your password? </span><br> &nbsp; Type in a new password below. <br> 
 		  &nbsp;  Passwords must be at least 8 characters.
 		</p> <br>

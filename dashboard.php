@@ -10,18 +10,16 @@ session_start();
 	<title>Dashboard</title>
 	<link href="cwtstyle.css" type="text/css" rel="stylesheet" />
 	<link href="favicon.ico" type="image/gif" rel="icon" />
+	<link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script> 
 		$(document).ready(function(){
+		  $("#dashbd-table").load("dashbd_table.php?role=Tchr");
 		  $("#teacher").click(function(){
 			$("#dashbd-table").load("dashbd_table.php?role=Tchr");
 			$(".list").removeClass("active");
 			$("#teacher").addClass("active");
 		  });
-		});
-	</script>
-	<script> 
-		$(document).ready(function(){
 		  $("#observer").click(function(){
 			$("#dashbd-table").load("dashbd_table.php?role=Obsvr");
 			$(".list").removeClass("active");
@@ -50,7 +48,7 @@ session_start();
 	<div class="listhead rounded_corners">
 		My Observations
 	</div> <!-- listhead -->
-	<div id="teacher" class="list">
+	<div id="teacher" class="list active">
 		as Teacher
 	</div> <!-- list -->
 	<div id="observer" class="list"> 
@@ -58,18 +56,18 @@ session_start();
 	</div> <!-- list -->
 </div>  <!-- rounded_corners -->
 	
-	<div class="rounded_corners">
+<!-- Other Observations menu selector not in use
+<div class="rounded_corners">
 	<div class="listhead rounded_corners">
 		Other Observations
 	</div> <!-- listhead -->
-	<a href=""> <div class="list">
+<!--	<a href=""> <div class="list">
 		Shared with me 
 	</div> </a> <!-- list -->
-	<a href=""><div class="list"> 
+<!--	<a href=""><div class="list"> 
 		 Recommended 
 	</div> </a><!-- list -->
-	
-	</div> <!-- rounded_corners -->
+<!-- </div> <!-- rounded_corners -->
 
 		</div> <!-- dashbd-menu -->
 		<div id="dashbd-table">

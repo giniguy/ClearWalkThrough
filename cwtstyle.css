@@ -27,12 +27,15 @@ a:visited {
 
 table {
     width: 100%;
+	font-size: 14px;
+
 }
 
 th {
 	background-color: #000066;
 	color: #e1e1e1;
 	padding: 7px;
+	font-weight: normal;
 }
 
 tr {   
@@ -58,22 +61,22 @@ td {
 	width: 100%;
 	height: auto;
 	margin-bottom: 15px;
-	font-size: 14px;
+/*	font-size: 12px;  */
 }
 
 .obs_button {
   display: inline-block;
   width: 175px;
   padding: 5px 17px;
+  font-family: 'Patua One', cursive;
   font-size: 16px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  outline: none;
   color: #000;
   background-color: #ffffff;
   border-style: solid;
-  border: 1px;
+  border: 1px solid green;
   border-radius: 8px;
   box-shadow: 0 2px #999;
 }
@@ -86,6 +89,72 @@ td {
   background-color: #f5f5f5;
   box-shadow: 0 2px #666;
 }
+.obs_cancel {
+  display: inline-block;
+  margin-left: 15px;
+  padding: 5px 5px;
+  font-family: 'Patua One', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background-color: #ffffff;
+  border-style: solid;
+  border: 1px solid grey;
+  border-radius: 8px;
+  box-shadow: 0 2px #999;
+}
+.obs_disable {
+  display: inline-block;
+  margin-left: 15px;
+  padding: 5px 5px;
+  font-family: 'Patua One', cursive;
+  font-size: 16px;
+  cursor: default;
+  text-align: center;
+  text-decoration: none;
+  color: #a1a1a1;
+  background-color: #ffffff;
+  border-style: solid;
+  border: 1px solid #a1a1a1;
+  border-radius: 8px;
+  box-shadow: 0 2px #999;
+}
+
+.obs_start {
+  display: inline-block;
+  margin-left: 15px;
+  padding: 5px 5px;
+  font-family: 'Patua One', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: green;
+  background-color: #ffffff;
+  border-style: solid;
+  border: 1px solid green;
+  border-radius: 8px;
+  box-shadow: 0 2px #999;
+}
+.obs_stop {
+  display: inline-block;
+  margin-left: 15px;
+  padding: 5px 5px;
+  font-family: 'Patua One', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background-color: #cc5050;
+  border-style: solid;
+  border: 2px solid red;
+  border-radius: 8px;
+  box-shadow: 0 2px #999;
+}
+
 
 .centered {
   position: absolute;
@@ -113,7 +182,7 @@ td {
 
 .content {
 	overflow: auto;
-	font-size: 14px;
+/*	font-size: 14px; */
 }
 
 .footer {
@@ -124,7 +193,7 @@ td {
     left: 0;
 	font-family: Tahoma, Geneva, sans-serif;
 	color: black;
-	font-size: 14px;
+/*	font-size: 14px; */
 	background-color: #E1E1E1;
 }
 
@@ -133,6 +202,10 @@ fieldset {
 	width: 750px;
 	border: 0px;
 	padding-bottom: 40px;
+}
+label.selector {
+	margin-left: 15px;
+	font-weight: bold;
 }
 
 label.formheading {
@@ -171,6 +244,8 @@ label.columnright
 
 #nav {
 	margin-top: 30px;
+	font-family: 'Patua One', cursive;
+	font-size: 18px;
 }
 
 #navlogo {
@@ -203,7 +278,7 @@ label.columnright
 #dashboard {
 	height: 400px;
 	width: 99%;
-	font-size: 14px;
+/*	font-size: 14px; */
 }
 
 #dashbd-menu {
@@ -217,6 +292,7 @@ label.columnright
 	float: left;
 	margin-left: 10px;
 	margin-top: 20px;
+	min-width: 700px;
 }
 
 .listhead {
@@ -238,7 +314,8 @@ label.columnright
 .list {
 	display: block;
 	text-align: center;
-	padding: 5px 0;  
+	padding: 5px 0; 
+	margin-bottom: 4px; 	
 	width: 174px;
 	cursor:pointer;
 }
@@ -256,7 +333,7 @@ label.columnright
 .menutable {
 	width: 100%;
 	margin-bottom: 15px;
-	font-size: 14px;
+/*	font-size: 14px; */
 }
 
 #selector {
@@ -326,4 +403,8 @@ label.columnright
 .tabmenu .active {
 	background-color: #000066;
 	color: white;
+}
+
+form {
+	border: 0px;
 }

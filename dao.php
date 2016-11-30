@@ -1,8 +1,9 @@
 <?php
 class Dao {
-/* 	// connection for local database
+
+/* 	// connection to localhost
 private $host = "localhost";
-private $db = "clearwalkthrough";
+private $db = "ClearWalkThrough";
 private $user = "root";
 private $pass = "DB_login"; */
 
@@ -31,6 +32,11 @@ public function getUserByEMail ($email) {
 public function getUserByUN ($username) {
 	$conn = $this->getConnection();
 	return $conn->query("SELECT * FROM users WHERE username = '$username'");
+} // end getUserByUN
+
+public function getUserByID ($userID) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM users WHERE userID = '$userID'");
 } // end getUserByUN
 
 public function checkPassword ($username, $password) {
@@ -65,11 +71,13 @@ public function createUser ($username,$password,$firstname,$lastname,$email) {
 		if(!$pw) {
 			throw new Exception("Password could not be hashed.");
 		}
-		// insert user into users table
+		$xID = uniqid();
+	// insert user into users table
 	$query = 
-		"INSERT INTO users (username, password, firstname, lastname, email)
-			VALUES (:username, :password, :firstname, :lastname, :email)";
+		"INSERT INTO users (xternalID, username, password, firstname, lastname, email)
+			VALUES (:xternalID, :username, :password, :firstname, :lastname, :email)";
 	$q = $conn->prepare($query);
+	$q->bindParam(":xternalID", $xID);
 	$q->bindParam(":username", $username);
 	$q->bindParam(":password", $pw);
 	$q->bindParam(":lastname", $lastname);
@@ -78,26 +86,26 @@ public function createUser ($username,$password,$firstname,$lastname,$email) {
 	$q->execute();
 } // end createUser
 	
-public function assignRole($role, $email) {	// assign user roles
+public function assignRole($roleID, $email) {	// assign user roles
 	$conn = $this->getConnection();
 	$users = $this->getUserByEMail($email);
 	foreach ($users as $user) { 
 		$userID = $user["userID"];
-		$query = "INSERT INTO user_role (user, role) VALUES (:user, :role)";
+		$query = "INSERT INTO user_role (userID, roleID) VALUES (:userID, :roleID)";
 			$q = $conn->prepare($query);
-			$q->bindParam(":user", $userID);
-			$q->bindParam(":role", $role);
+			$q->bindParam(":userID", $userID);
+			$q->bindParam(":roleID", $roleID);
 			$q->execute();			
 	} // end foreach
 } // end assignRole
 	
-public function updatePassword($email, $password) {
+public function updatePassword($xID, $password) {
 		$pw = password_hash($password, PASSWORD_DEFAULT);
 		if(!$pw) {
 			throw new Exception("Password could not be hashed.");
 		}
 	$conn = $this->getConnection();
-	$query = "UPDATE users SET password = '$pw' WHERE email = '$email'";
+	$query = "UPDATE users SET password = '$pw' WHERE xternalID = '$xID'";
 	$q = $conn->prepare($query);
 	$q->bindParam(":password", $pw);
 	$q->execute();
@@ -127,5 +135,87 @@ public function getObsvrObservation($userID) {
 		 WHERE observer = '$userID'");			
 } // end getObsvrObservation
 
+public function getTeachers($userID) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM users
+		JOIN user_role ON users.userID = user_role.userID
+			WHERE user_role.roleID = '1' AND user_role.userID != '$userID'");
+}  // end getTeachers
+
+public function getDomains() {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM domains");
+}  // end getDomains
+
+public function getBehaviors($domainID) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM behaviors WHERE domainID = '$domainID'");
+}  // end getBehaviors
+
+public function getComments($behaviorID) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM comments 
+		JOIN ratings ON comments.ratingID = ratings.ratingID
+			WHERE comments.behaviorID = '$behaviorID'
+				ORDER BY ratings.value DESC;");
+}  // end getComments
+
+public function createObservation($obsDate, $teacher, $observer, $classPeriod) {
+	$conn = $this->getConnection();
+	$xternalID = uniqid();
+	// insert observation details into observations table
+	$query = 
+		"INSERT INTO observations (xternalID, obsDate, teacher, observer, classPeriod)
+			VALUES (:xternalID, :obsDate, :teacher, :observer, :classPeriod)";
+	$q = $conn->prepare($query);
+	$q->bindParam(":xternalID", $xternalID);
+	$q->bindParam(":obsDate", $obsDate);
+	$q->bindParam(":teacher", $teacher);
+	$q->bindParam(":observer", $observer);
+	$q->bindParam(":classPeriod", $classPeriod);
+	$q->execute();
+}  // end createObservation
+
+public function getObsID($obsDate, $teacher, $observer, $classPeriod) {
+	$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM observations WHERE obsDate='$obsDate' AND teacher='$teacher' AND observer='$observer' AND classPeriod='$classPeriod'");
+}  // end getObsID
+
+public function endObservation($obsID) {
+		$obsLength = $_SESSION['recording']['elapsedTime'];
+		$rating = $_SESSION['recording']['rating'];
+		$videofile = $_SESSION['recording']['videofile'];
+	$conn = $this->getConnection();
+	$query = "UPDATE observations  
+		SET obsLength = '$obsLength', rating = '$rating', videofile = '$videofile' 
+		WHERE xternalID = '$obsID'";
+	$q = $conn->prepare($query);
+	$q->bindParam(":obsLength", $_SESSION['recording']['elapsedTime']);
+	$q->bindParam(":rating", $_SESSION['recording']['rating']);
+	$q->bindParam(":videofile", $_SESSION['recording']['videofile']);
+	$q->execute();
+} // end endObservation
+
+function secondsToTime($seconds)
+{
+    $hours = floor($seconds / 3600);
+    $seconds -= $hours * 3600;
+    $minutes = floor($seconds / 60);
+    $seconds -= $minutes * 60;
+    return $hours.':'.sprintf('%02d', $minutes).':'.sprintf('%02d', $seconds);
+}
+
+public function insertObservationComment($obsXID, $commentID, $time) {
+		$conn = $this->getConnection();
+	// insert selected comment into observation_comments table
+	$query = 
+		"INSERT INTO observation_comments (obsXID, commentID, time)
+			VALUES (:obsXID, :commentID, :time)";
+	$q = $conn->prepare($query);
+	$q->bindParam(":obsXID", $obsXID);
+	$q->bindParam(":commentID", $commentID);
+	$q->bindParam(":time", $time);
+	$q->execute();
+} // end insert observation comment
 
 }  //end Dao

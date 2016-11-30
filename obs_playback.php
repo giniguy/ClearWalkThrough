@@ -19,7 +19,9 @@ $obsID = $_GET['obsID'];
 </div> <!-- header -->
 
 <div class="content">
-	<div id="right"> <a href="dashboard.php"> <-- Back to Dashboard </a>
+	<div id="right"> <form method="post" action="dashboard.php">
+			<button class="obs_cancel"><-- Back to Dashboard </button>
+			</form>
 		</div>
 	<div id="dashboard">
 		<div id="video">
