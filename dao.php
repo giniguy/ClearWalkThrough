@@ -125,14 +125,16 @@ public function getTchrObservation($userID) {
 	$conn = $this->getConnection();
 	return $conn->query("SELECT * FROM observations 
 		JOIN users ON observer = userID 
-		 WHERE teacher = '$userID'");			
+		 WHERE teacher = '$userID'
+			ORDER BY obsDate DESC");			
 } // end getTchrObservation
 
 public function getObsvrObservation($userID) {
 	$conn = $this->getConnection();
 	return $conn->query("SELECT * FROM observations 
 		JOIN users ON teacher = userID 
-		 WHERE observer = '$userID'");			
+		 WHERE observer = '$userID'
+			ORDER BY obsDate DESC");			
 } // end getObsvrObservation
 
 public function getTeachers($userID) {
