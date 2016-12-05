@@ -129,7 +129,7 @@ $("#obs_options").validate({
 </script>
 </div> 
 <?php } else {  // recording in progress, display details  
- var_dump($_SESSION['recording']);
+// var_dump($_SESSION['recording']);
 ?>
 	<div id="right"> <button class="obs_disable"><-- Back to Dashboard </button>
 	</div>
