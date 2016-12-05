@@ -164,13 +164,13 @@ public function getComments($behaviorID) {
 
 public function createObservation($obsDate, $teacher, $observer, $classPeriod) {
 	$conn = $this->getConnection();
-	$xternalID = uniqid();
+	$obsXternalID = uniqid();
 	// insert observation details into observations table
 	$query = 
-		"INSERT INTO observations (xternalID, obsDate, teacher, observer, classPeriod)
-			VALUES (:xternalID, :obsDate, :teacher, :observer, :classPeriod)";
+		"INSERT INTO observations (obsXternalID, obsDate, teacher, observer, classPeriod)
+			VALUES (:obsXternalID, :obsDate, :teacher, :observer, :classPeriod)";
 	$q = $conn->prepare($query);
-	$q->bindParam(":xternalID", $xternalID);
+	$q->bindParam(":obsXternalID", $obsXternalID);
 	$q->bindParam(":obsDate", $obsDate);
 	$q->bindParam(":teacher", $teacher);
 	$q->bindParam(":observer", $observer);
@@ -190,7 +190,7 @@ public function endObservation($obsID) {
 	$conn = $this->getConnection();
 	$query = "UPDATE observations  
 		SET obsLength = '$obsLength', rating = '$rating', videofile = '$videofile' 
-		WHERE xternalID = '$obsID'";
+		WHERE obsXternalID = '$obsID'";
 	$q = $conn->prepare($query);
 	$q->bindParam(":obsLength", $_SESSION['recording']['elapsedTime']);
 	$q->bindParam(":rating", $_SESSION['recording']['rating']);
@@ -219,5 +219,17 @@ public function insertObservationComment($obsXID, $commentID, $time) {
 	$q->bindParam(":time", $time);
 	$q->execute();
 } // end insert observation comment
+
+public function getObservation($obsXID) {
+		$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM observations WHERE obsXternalID = '$obsXID'");
+} // end getObservation
+
+public function getObsComments($obsXID) {
+		$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM observation_comments 
+		JOIN comments ON observation_comments.commentID = comments.commentID
+			WHERE observation_comments.obsXID = '$obsXID';");
+} // end getObsComments
 
 }  //end Dao

@@ -3,7 +3,7 @@ session_start();
 require "dao.php";
 $userID = $_SESSION['user']['userID'];
 $role = $_GET['role']; 
-	
+
 ?>
 <html>
 	<div class="table_corners">
@@ -43,7 +43,7 @@ if ($role=='Tchr') {
 			</td>
 			<td> <?php echo $row["obsLength"]; ?>
 			</td>
-			<td> <a href="obs_playback.php?obsID=<?php echo $row["xternalID"]; ?>"><img src="images/play.png"></a>
+			<td> <a href="obs_playback.php?obsID=<?php echo $row["obsXternalID"]; ?>"><img src="images/play.png"></a>
 			</td>
 		</tr>
 	<?php  }  // end foreach  
@@ -70,8 +70,9 @@ if ($role=='Obsvr') {
 			</td>
 			<td> <?php echo $row["obsLength"]; ?>
 			</td>
-			<td> <a href="obs_playback.php?obsID=<?php echo $row["xternalID"]; ?>"><img src="images/play.png"></a>
+			<td> <a href="obs_playback.php?obsID=<?php echo $row["obsXternalID"]; ?>"><img src="images/play.png"></a>
 			</td>
+
 		</tr>
 	<?php  }  // end foreach  
  } // end if observer

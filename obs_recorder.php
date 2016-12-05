@@ -26,6 +26,8 @@ $dao = new dao;
 	<title>Observation Recorder</title>
 	<link href="cwtstyle.css" type="text/css" rel="stylesheet" />
 	<link href="favicon.ico" type="image/gif" rel="icon" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/validate/dist/jquery.validate.js"></script>
 </head>
 
 <body>
@@ -54,6 +56,12 @@ function openBehavior(behaviorName) {
     document.getElementById(behaviorName).style.display = "block";
 }
 
+$(document).ready(function(){
+    $("#selectComment").click(function(){
+        $("#comments").append("<li>Appended item</li>");
+    });
+});
+
 </script>
 <div class="wrapper">
 <div class="header">
@@ -69,11 +77,11 @@ function openBehavior(behaviorName) {
 			</form>
 	</div>
 	
-	<div id="selector" > 
-	<form method="post" action="handlers/begin_recording_handler.php"> 
+<div id="selector"> 
+	<form method="post" id="obs_options" action="handlers/begin_recording_handler.php"> 
 		<label class="selector">Teacher: </label>
 		<select name="teacher">   
-			<option value="0">Select . . .</option>
+			<option value=''>Select . . .</option>
 			<?php 	// get teachers from db to populate selector
 				$teachers = $dao -> getTeachers($_SESSION['user']['userID']);  // pass logged in user to function so it will be omitted from list
 				foreach ($teachers as $teacher) {
@@ -81,11 +89,12 @@ function openBehavior(behaviorName) {
 					$firstname = $teacher["firstname"];
 					$lastname = $teacher["lastname"];
 			?>
-			<option value="<?php echo $ID; ?>"><?php echo $firstname; echo" "; echo $lastname;?></option>
+			<option value="<?php echo $ID; ?>"><?php echo "$firstname $lastname";?></option>
 			<?php	} // end foreach 	?>
 		</select>
 		<label class="selector">Date of Observation: </label>
-			<input type="date" size="6" name="date"/>
+<!--date selector			<input type="date" size="6" name="date" id="date"/> -->
+			<input type="text" size="8" name="date" value="<?php echo date("m/d/Y"); ?>" readonly/>
 		<label class="selector">Class Period: </label>
 		<select name="period">   
 			<option value="">Select . . .</option>
@@ -101,21 +110,38 @@ function openBehavior(behaviorName) {
 
 		<button id="submit" class="obs_start">Begin Recording</button>	
 	</form>
-	</div> 
+<script>	
+$("#obs_options").validate({
+		rules: {
+			teacher: {required: true },
+			date: {
+				required: true,
+				date: true,
+				},
+			period: {required: true }
+		},
+		messages: {
+			teacher: {required: "Select a teacher" },
+			date: {required: "Enter today's date" },
+			period: {required: "Select the class period" }
+		}
+});
+</script>
+</div> 
 <?php } else {  // recording in progress, display details  
-// var_dump($_SESSION['recording']);
+ var_dump($_SESSION['recording']);
 ?>
 	<div id="right"> <button class="obs_disable"><-- Back to Dashboard </button>
 	</div>
 
-	<div id="selector" > 
+<div id="selector"> 
 	<form method="post" action="handlers/stop_recording_handler.php"> 
 		<label class="selector">Teacher: </label>
-		<input type="text" name="teacher" value="<?php echo $_SESSION['recording']['teacherName']; ?>"/>
+		<input type="text" name="teacher" value="<?php echo $_SESSION['recording']['teacherName']; ?>" readonly/>
 		<label class="selector">Date of Observation: </label>
-		<input type="text" size="6" name="date" value="<?php echo $_SESSION['recording']['obsDate']; ?>"/>
+		<input type="text" size="6" name="date" value="<?php echo $_SESSION['recording']['obsDate']; ?>" readonly/>
 		<label class="selector">Class Period: </label>
-		<input type="text" name="period" size="1" value="<?php echo $_SESSION['recording']['classPeriod']; ?>"/>
+		<input type="text" name="period" size="1" value="<?php echo $_SESSION['recording']['classPeriod']; ?>" readonly/>
 		<button class="obs_stop">Stop Recording</button>	
 	</form>
 </div>
@@ -127,8 +153,9 @@ function openBehavior(behaviorName) {
 			Webcam: <br> <img src="images/video_recorder.png" />
 		</div> <!-- video -->
 		<div id="comments">
-			Comments: <br> 			
-			Selected comments display here <br>
+			Comments: <br> <br>			
+			00:00 start recording
+			
 		</div> <!-- comments -->	
 		
 	<div id="domain_selector">
@@ -170,7 +197,7 @@ function openBehavior(behaviorName) {
 					?>
 					<div id="behavior_<?php echo $behavior_div; ?>" class="behavior comment_display">
 					Rating
-					<form method="post" action="handlers/comment_handler.php">
+					<form id="obs_comments" method="post" action="handlers/comment_handler.php">
 						<table>
 							<?php // get comment details from db based on behavior
 								$comments = $dao -> getComments($behavior_div);
@@ -181,21 +208,33 @@ function openBehavior(behaviorName) {
 									$value = $comment["value"];
 									$keyword = $comment["keywords"];
 									$behaviorID = $comment["behaviorID"];
+									$submit = "$ID-$value";
 							?>
 							<tr>
-								<td><input type="radio" name="comment_value" id="<?php echo $behaviorID; echo $value; ?>" value="<?php echo $value; ?>"/></td>
+								<td><input type="radio" name="comment_value" id="<?php echo $behaviorID; echo $value; ?>" value="<?php echo $submit; ?>"/></td>
 								<td><label for="<?php echo $behaviorID; echo $value; ?>"><?php echo $rating; ?></label></td>
-								<td><label for="<?php echo $behaviorID; echo $value; ?>"><?php echo $keyword; ?></label></td>
+								<td><label for="<?php echo $behaviorID; echo $value; ?>"><?php echo $name; ?></label></td>
 							</tr>
-							<tr>
-								<td></td>
-								<td colspan="2"><label for="<?php echo $behaviorID; echo $value; ?>"><?php echo $name; ?></label></td>
-							</tr>
-							<?php	}  // end foreach $comments  ?>
-							<tr> <td colspan="3"><button>Comment</button></td></tr>
+							<?php	}  // end foreach $comments  
+							// if recording in progress, display button to submit comment
+						if ($_SESSION['recording']['activated']) { 	?>
+							<tr> <td colspan="3" id="last_row"><button id="selectComment">Comment</button></td></tr>
+						<?php }  // end if  ?>
 						</table>
-							<input type="hidden" name="commentID" value="<?php echo $ID; ?>"/>
 						</form>
+<script>	
+$("#obs_comments").validate({
+		rules: {
+			comment_value: {
+				required: true,
+				}
+		},
+		messages: {
+			comment_value: {required: "Select a rating" }
+		}	
+});
+</script>
+
 					</div> <!-- behavior div -->
 				<?php  }  // end foreach $behavior_array   ?>
 

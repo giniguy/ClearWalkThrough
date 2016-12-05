@@ -71,7 +71,7 @@ session_start();
 
 		</div> <!-- dashbd-menu -->
 		<div id="dashbd-table">
-			<?php // require_once "dashbd_table.php"; ?> 
+		 <!-- populates from jquery script -->
 		</div> <!-- dashbd-table -->
 	</div> <!-- dashboard -->
 

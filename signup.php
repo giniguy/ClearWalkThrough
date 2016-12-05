@@ -15,7 +15,6 @@ session_start();
 </div> <!-- header -->
 
 <div class="content">
-<a href="logout.php" >LOGOUT</a>
 	<div>
 	<fieldset>
 	Enter information for your account below. </br>All fields are required.</br></br>
@@ -70,9 +69,12 @@ session_start();
 				<?php }?>
 		<br>
 
-		<input type="submit" value="Submit">
+		<input type="submit" value="Submit"></input>
 	</fieldset>
-	</form>
+	</form> 
+	<fieldset>
+		<a href="index.php"> Back to login </a>
+	</fieldset>
 	</div> <!-- loginformlayout -->
 
 </div>  <!-- content -->
