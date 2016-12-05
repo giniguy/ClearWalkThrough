@@ -4,9 +4,13 @@ require "../dao.php";
 
 $dao = new dao();
 // post variables
-$commentID = $_POST['commentID'];
-$value = $_POST['comment_value'];
+$submit = $_POST['comment_value'];
+	$code = explode("-",$submit);
+	$commentID = $code[0];
+	$value = $code[1];
 $time = time();
+
+echo "$submit<br>$commentID<br>$value".
 
 
 // calculate time of comment

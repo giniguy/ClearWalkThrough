@@ -7,7 +7,6 @@ $dao = new dao();
 $teacher = $_POST['teacher'];
 $date = $_POST['date'];
 $period = $_POST['period'];
-	$period = $dao -> cleanText($period);
 $observer = $_SESSION['user']['userID'];
 
 	// create observation record in db
@@ -16,7 +15,7 @@ $observer = $_SESSION['user']['userID'];
 	// get observation ID from db
 	$obsIDs = $dao -> getObsID($date, $teacher, $observer, $period);
 		foreach ($obsIDs as $obsID) {
-			$obsID = $obsID["xternalID"];
+			$obsID = $obsID["obsXternalID"];
 		} // end foreach
 	// get teacher name from users db
 	$users = $dao -> getUserByID($teacher);
