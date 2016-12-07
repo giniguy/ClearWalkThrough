@@ -1,0 +1,15 @@
+/*variables*/
+.ui-state-invalid > input[type="text"], .ui-state-invalid > input[type="email"], {
+  border-color: #cc0000;
+  background-image: url(../images/invalid.png);
+  background-position: 95% center;
+  background-repeat: no-repeat; }
+
+.ui-state-valid > input[type="text"], .ui-state-valid > input[type="email"], {
+  border-color: #00b233;
+  background-image: url(../images/valid.png);
+  background-position: 95% center;
+  background-repeat: no-repeat; }
+
+.ui-error-message {
+  color: #cc0000; }
