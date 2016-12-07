@@ -1,5 +1,9 @@
 <?php 
 session_start();
+ if (!isset($_SESSION['authenticated']) || !($_SESSION['authenticated'])) {
+	 header("Location:index.php");
+ }
+
  if (!isset($_SESSION['recording'])) {
 	$_SESSION['recording'] = array('activated' => false,
 							'obsID' => "",
