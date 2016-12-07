@@ -1,16 +1,20 @@
 <?php
 session_start();
+ if (!isset($_SESSION['authenticated']) || !($_SESSION['authenticated'])) {
+	 header("Location:index.php");
+ }
+
 require "dao.php";
 
 $dao = new dao;
-$behaviorID = $_GET['behaviorID'];
-echo $domainID;
+$domainID = $_GET['domainID'];
+
 ?>
 <html>
 <head>
 	<script>
 function loadComment(behaviorID) {
-		$("#comment_selector").load("comment_selector.php?behaviorID=behaviorID");
+		$("#comment_selector").load("comment_selector.php?behaviorID=" + behaviorID);
 };
 	</script>
 

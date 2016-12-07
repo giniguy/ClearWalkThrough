@@ -33,28 +33,9 @@ $dao = new dao;
 <body>
 <script>
   
-function openDomain(domainName) {
-    var i;
-    var x = document.getElementsByClassName("domain");
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";
-    }
-		var j;
-		var y = document.getElementsByClassName("behavior");
-		for (j = 0; j < y.length; j++) {
-		   y[j].style.display = "none";
-		}
-    document.getElementById(domainName).style.display = "block";
-}
-
-function openBehavior(behaviorName) {
-    var j;
-    var y = document.getElementsByClassName("behavior");
-    for (j = 0; j < y.length; j++) {
-       y[j].style.display = "none";
-    }
-    document.getElementById(behaviorName).style.display = "block";
-}
+function loadBehavior(domainID) {
+		$("#behavior_selector").load("behavior_selector.php?domainID=" + domainID);
+};
 
 $(document).ready(function(){
     $("#selectComment").click(function(){
@@ -77,7 +58,7 @@ $(document).ready(function(){
 			</form>
 	</div>
 	
-<div id="selector"> 
+	<div id="selector" > 
 	<form method="post" id="obs_options" action="handlers/begin_recording_handler.php"> 
 		<label class="selector">Teacher: </label>
 		<select name="teacher">   
@@ -89,7 +70,7 @@ $(document).ready(function(){
 					$firstname = $teacher["firstname"];
 					$lastname = $teacher["lastname"];
 			?>
-			<option value="<?php echo $ID; ?>"><?php echo "$firstname $lastname";?></option>
+			<option value="<?php echo $ID; ?>"><?php echo $firstname; echo" "; echo $lastname;?></option>
 			<?php	} // end foreach 	?>
 		</select>
 		<label class="selector">Date of Observation: </label>
@@ -127,14 +108,14 @@ $("#obs_options").validate({
 		}
 });
 </script>
-</div> 
+	</div> 
 <?php } else {  // recording in progress, display details  
 // var_dump($_SESSION['recording']);
 ?>
 	<div id="right"> <button class="obs_disable"><-- Back to Dashboard </button>
 	</div>
 
-<div id="selector"> 
+	<div id="selector" > 
 	<form method="post" action="handlers/stop_recording_handler.php"> 
 		<label class="selector">Teacher: </label>
 		<input type="text" name="teacher" value="<?php echo $_SESSION['recording']['teacherName']; ?>" readonly/>
@@ -169,64 +150,20 @@ $("#obs_options").validate({
 					$name = $domain["domain"];
 				$domain_array[] = $ID; 
 			?>
-		  <li><a href="#" onclick="openDomain('domain_<?php echo $ID; ?>');"><?php echo $name; ?></a></li>
-			<?php	}  // end foreach  ?>
+		  <li id="<?php echo $ID; ?>"><a href="#" onclick="loadBehavior('<?php echo $ID; ?>');"><?php echo $name; ?></a></li>
+		  <?php	}  // end foreach  ?>
 		</ul>
-		<?php 
-			// iterate over domain_array and prepare domain divs for display
-		foreach ($domain_array as $domain_div) {
-			?>
-			<div id="domain_<?php echo $domain_div; ?>" class="domain comment_display">
-			Observed Student Behaviors
-				<ul class="tabmenu">
-					<?php // get behaviors from db based on domain
-						$behaviors = $dao -> getBehaviors($domain_div);
-						$behavior_array = [];
-						foreach ($behaviors as $behavior) {
-							$ID = $behavior["behaviorID"];
-							$name = $behavior["behavior"];
-						$behavior_array[] = $ID;
-					?>
-						  <li><a href="#" onclick="openBehavior('behavior_<?php echo $ID; ?>');"><?php echo $name; ?></a></li>
-					<?php	}  // end foreach $behaviors  ?>
-				</ul>
 
-				<?php 
-					//iterate over behavior_array and prepare behavior divs for display
-				foreach ($behavior_array as $behavior_div) {
-					?>
-					<div id="behavior_<?php echo $behavior_div; ?>" class="behavior comment_display">
-					Rating
-					<form id="obs_comments" method="post" action="handlers/comment_handler.php">
-						<table>
-							<?php // get comment details from db based on behavior
-								$comments = $dao -> getComments($behavior_div);
-								foreach ($comments as $comment) {
-									$ID = $comment["commentID"];
-									$name = $comment["comment"];
-									$rating = $comment["rating"];
-									$value = $comment["value"];
-									$keyword = $comment["keywords"];
-									$behaviorID = $comment["behaviorID"];
-									$submit = "$ID-$value";
-							?>
-							<tr>
-								<td><input type="radio" name="comment_value" id="<?php echo $behaviorID; echo $value; ?>" value="<?php echo $submit; ?>"/></td>
-								<td><label for="<?php echo $behaviorID; echo $value; ?>"><?php echo $rating; ?></label></td>
-								<td><label for="<?php echo $behaviorID; echo $value; ?>"><?php echo $name; ?></label></td>
-							</tr>
-							<?php	}  // end foreach $comments  
-							// if recording in progress, display button to submit comment
-						if ($_SESSION['recording']['activated']) { 	?>
-							<tr> <td colspan="3" id="last_row"><button id="selectComment">Comment</button></td></tr>
-						<?php }  // end if  ?>
-						</table>
-						</form>
-<script>	
+		<div id="behavior_selector" class="domain2 comment_display">
+			<!--  load behavior_selector.php here with loadDomain script -->
+		</div>
+
+		<script>	
 $("#obs_comments").validate({
 		rules: {
 			comment_value: {
 				required: true,
+				min: 1
 				}
 		},
 		messages: {
@@ -236,10 +173,10 @@ $("#obs_comments").validate({
 </script>
 
 					</div> <!-- behavior div -->
-				<?php  }  // end foreach $behavior_array   ?>
+				<?php // }  // end foreach $behavior_array   ?>
 
 			</div> <!-- domain_div -->
-		<?php 	}  // end foreach $domain_array		?> 
+		<?php //	}  // end foreach $domain_array		?> 
 
 	</div> <!-- domain_selector -->	
 

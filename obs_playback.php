@@ -1,5 +1,9 @@
 <?php
 session_start();
+ if (!isset($_SESSION['authenticated']) || !($_SESSION['authenticated'])) {
+	 header("Location:index.php");
+ }
+
 require "dao.php";
 $obsXID = $_GET['obsID'];
 $dao = new dao;
