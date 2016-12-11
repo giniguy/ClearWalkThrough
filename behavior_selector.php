@@ -15,8 +15,8 @@ $domainID = $_GET['domainID'];
 	<script>
 function loadComment(behaviorID) {
 		$("#comment_selector").load("comment_selector.php?behaviorID=" + behaviorID);
-			$(".list").removeClass("active");
-			$("#2").addClass("active");
+			$(".selectB").removeClass("active");
+			$("#behavior_" + behaviorID).addClass("active");
 };
 	</script>
 
@@ -30,7 +30,7 @@ function loadComment(behaviorID) {
 							$ID = $behavior["behaviorID"];
 							$name = $behavior["behavior"];
 					?>
-						  <li id="<?php echo $ID; ?>" class="active"><a href="#" onclick="loadComment('<?php echo $ID; ?>');" ><?php echo $name; ?></a></li>
+						  <li><a href="#" onclick="loadComment('<?php echo $ID; ?>');"  id="behavior_<?php echo $ID; ?>" class="selectB"><?php echo $name; ?></a></li><br>
 					<?php	}  // end foreach $behaviors  ?>
 
 		</ul>

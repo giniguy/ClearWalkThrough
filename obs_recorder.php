@@ -39,6 +39,8 @@ $dao = new dao;
   
 function loadBehavior(domainID) {
 		$("#behavior_selector").load("behavior_selector.php?domainID=" + domainID);
+			$(".selectD").removeClass("active");
+			$("#domain_" + domainID).addClass("active");
 };
 
 $(document).ready(function(){
@@ -154,7 +156,7 @@ $("#obs_options").validate({
 					$name = $domain["domain"];
 				$domain_array[] = $ID; 
 			?>
-		  <li id="<?php echo $ID; ?>" ><a href="#" onclick="loadBehavior('<?php echo $ID; ?>');" class="active"><?php echo $name; ?></a></li>
+		  <li><a href="#" onclick="loadBehavior('<?php echo $ID; ?>');" id="domain_<?php echo $ID; ?>" class="selectD"><?php echo $name; ?></a></li>
 		  <?php	}  // end foreach  ?>
 		</ul>
 
