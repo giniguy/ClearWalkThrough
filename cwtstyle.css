@@ -355,7 +355,7 @@ label.columnright
 #comments {
 	float: left;
 	width: 20%;
-	height: 400px;
+	height: 250px;
 	border: 1px solid #5f5f5f;
 	overflow-y: scroll;
 }
@@ -371,7 +371,7 @@ label.columnright
 	float: left;
 	left: 475px;
 	width: 50%;
-	height: 400px;
+	height: 250px;
 	border: 1px solid #5f5f5f;
 	overflow: auto;
 }
@@ -411,6 +411,7 @@ label.columnright
 .behavior2 {
 	float: left;
 		margin: 20px 10px;
+	height: 400px;
 }
 
 
@@ -432,7 +433,7 @@ label.columnright
 	background-color: #afafaf;
 }
 
-.tabmenu .active {
+.tabmenu li .active {
 	background-color: #000066;
 	color: white;
 }

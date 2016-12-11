@@ -154,7 +154,7 @@ $("#obs_options").validate({
 					$name = $domain["domain"];
 				$domain_array[] = $ID; 
 			?>
-		  <li id="<?php echo $ID; ?>"><a href="#" onclick="loadBehavior('<?php echo $ID; ?>');"><?php echo $name; ?></a></li>
+		  <li id="<?php echo $ID; ?>" ><a href="#" onclick="loadBehavior('<?php echo $ID; ?>');" class="active"><?php echo $name; ?></a></li>
 		  <?php	}  // end foreach  ?>
 		</ul>
 
