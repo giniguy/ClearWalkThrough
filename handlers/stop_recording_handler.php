@@ -9,10 +9,14 @@ $dao = new dao();
 		$_SESSION['recording']['elapsedTime'] = $dao -> secondsToTime($seconds);
 
 // calculate observation rating
+if ($_SESSION['recording']['commentCount']==0) {     // no preset comments were entered
+	$rndRating = 0;
+} else {
 	$rating = $_SESSION['recording']['commentTotal'] / $_SESSION['recording']['commentCount'];
 	$rndRating = (round($rating * 2, 0))/2;
 	$_SESSION['recording']['rating'] = $rndRating;
-	
+}
+
 // generate video file name
 	$_SESSION['recording']['videofile'] = $_SESSION['recording']['obsID'].".mp4";
 

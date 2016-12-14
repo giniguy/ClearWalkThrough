@@ -33,6 +33,7 @@ $observer = $_SESSION['user']['userID'];
 			$_SESSION['recording']['obsDate'] = $date;
 			$_SESSION['recording']['classPeriod'] = $period;
 			$_SESSION['recording']['startTime'] = time();
+			$_SESSION['recording']['commentCount'] = 0;
 
 		// return to observation recording page
 		header("Location:../obs_recorder.php");
