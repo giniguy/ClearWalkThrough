@@ -434,7 +434,9 @@ label.columnright
 }
 
 .tabmenu li .active {
-	background-color: #006699;
-	color: white;
+	background-color: #000066;
+	opacity: 0.7;
+	color: white; 
+	
 }
 

@@ -220,6 +220,20 @@ public function insertObservationComment($obsXID, $commentID, $time) {
 	$q->execute();
 } // end insert observation comment
 
+public function insertFreeFormComment($obsXID, $commentText, $time) {
+		$conn = $this->getConnection();
+	// insert selected comment into freeform_comments table
+	$query = 
+		"INSERT INTO freeform_comments (obsXID, commentText, time)
+			VALUES (:obsXID, :commentText, :time)";
+	$q = $conn->prepare($query);
+	$q->bindParam(":obsXID", $obsXID);
+	$q->bindParam(":commentText", $commentText);
+	$q->bindParam(":time", $time);
+	$q->execute();
+} // end insert freeform comment
+
+
 public function getObservation($obsXID) {
 		$conn = $this->getConnection();
 	return $conn->query("SELECT * FROM observations WHERE obsXternalID = '$obsXID'");
@@ -230,6 +244,11 @@ public function getObsComments($obsXID) {
 	return $conn->query("SELECT * FROM observation_comments 
 		JOIN comments ON observation_comments.commentID = comments.commentID
 			WHERE observation_comments.obsXID = '$obsXID';");
+} // end getObsComments
+
+public function getFreeFormComments($obsXID) {
+		$conn = $this->getConnection();
+	return $conn->query("SELECT * FROM freeform_comments WHERE obsXID = '$obsXID';");
 } // end getObsComments
 
 }  //end Dao

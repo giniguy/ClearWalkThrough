@@ -26,7 +26,7 @@ $xID = $_GET['ID'];
 		  &nbsp;  Passwords must be at least 8 characters.
 		</p> <br>
 		<label class="formheading" for="password"> New password: </label>
-		<input id="password" name="password" type="password"> </input> 
+		<input id="password" name="password" type="password" autofocus> </input> 
 			<span class="error">	
 			<?php echo $_SESSION['errors']['passwordError']; 
 			 // clear passwordError 
@@ -38,6 +38,10 @@ $xID = $_GET['ID'];
 		<input type="submit" value="Submit">
 	</form>
 	</fieldset>
+		<fieldset>
+		<a href="index.php"> Back to login </a>
+	</fieldset>
+
 	</div> <!-- loginform -->
 </div>  <!-- content -->
 

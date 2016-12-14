@@ -142,7 +142,6 @@ $("#obs_options").validate({
 		<div id="comments">
 			Comments: <br> <br>			
 			00:00 start recording
-			
 		</div> <!-- comments -->	
 		
 	<div id="domain_selector">
@@ -163,32 +162,21 @@ $("#obs_options").validate({
 		<div id="behavior_selector" class="domain2 comment_display">
 			<!--  load behavior_selector.php here with loadDomain script -->
 		</div>
-
-		<script>	
-$("#obs_comments").validate({
-		rules: {
-			comment_value: {
-				required: true,
-				min: 1
-				}
-		},
-		messages: {
-			comment_value: {required: "Select a rating" }
-		}	
-});
-</script>
-
-					</div> <!-- behavior div -->
-				<?php // }  // end foreach $behavior_array   ?>
-
-			</div> <!-- domain_div -->
-		<?php //	}  // end foreach $domain_array		?> 
-
-	</div> <!-- domain_selector -->	
+		</div> <!-- domain_selector div -->
+		<div id="free_comment">
+		<form method="post" action="handlers/comment_handler.php"> 
+		<input type="text" name="comment_text" placeholder="Type additional comments here" />
+		<input type="hidden" name="comment_value" value="0-0"/>
+<?php					// if recording in progress, display button to submit comment
+			if ($_SESSION['recording']['activated']) { 	?>
+				<button id="freeComment">Comment</button>
+			<?php }  // end if  ?>
+		</form>
+		</div> <!-- free_comment -->
 
 	</div> <!-- dashboard -->
 
-</div>  <!-- content -->
+</div> <!-- content -->	
 
 <div class="footer">
 		<?php include "footer.php" 

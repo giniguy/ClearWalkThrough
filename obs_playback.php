@@ -74,15 +74,22 @@ $dao = new dao;
 			</video>
 		</div> 
 		<div id="comment_playback">
+		<table>
 		<?php 
 			$comments = $dao -> getObsComments($obsXID);
 				foreach ($comments as $comment) {   ?>
-		<table>
 		<tr> 
 			<td width="55px"><?php echo $comment["time"]; ?> </td>
 			<td><?php echo $comment["comment"]; ?> </td>
 		</tr>
 			<?php	} // end foreach
+			$text_comments = $dao -> getFreeFormComments($obsXID);
+				foreach ($text_comments as $text_comment) {   ?>
+		<tr>
+			<td><?php echo $text_comment["time"]; ?> </td>
+			<td><?php echo $text_comment["commentText"]; ?> </td>
+		</tr> 
+			<?php   } //end foreach
 			?>
 		</div> <!-- comment_playback -->
 

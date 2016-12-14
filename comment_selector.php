@@ -36,7 +36,6 @@ $behaviorID = $_GET['behaviorID'];
 				<tr> <td colspan="3" id="last_row"><button id="selectComment">Comment</button></td></tr>
 			<?php }  // end if  ?>
 	</table>
-			<input type="hidden" name="commentID" value="<?php echo $ID; ?>"/>
 	</form>
 
 </div>
