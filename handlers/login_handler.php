@@ -9,7 +9,7 @@ $password = $_POST['password'];
 $_SESSION['authenticated'] = false;
 
 $dao = new dao();
-	// check credentials
+	// check credentials and authenticate session
 	$dao -> checkPassword($username, $password);
 	if ($_SESSION['authenticated']) {
 		$dao -> updateLastLogin($username);
