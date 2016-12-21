@@ -43,12 +43,6 @@ function loadBehavior(domainID) {
 			$("#domain_" + domainID).addClass("active");
 };
 
-$(document).ready(function(){
-    $("#selectComment").click(function(){
-        $("#comments").append("<li>Appended item</li>");
-    });
-});
-
 </script>
 <div class="wrapper">
 <div class="header">
@@ -59,7 +53,7 @@ $(document).ready(function(){
 
 <div class="content">
 <?php if (!$_SESSION['recording']['activated']) {  // display form to begin recording ?>
-	<div id="right"> <form method="post" action="dashboard.php">
+	<div id="right_align"> <form method="post" action="dashboard.php">
 			<button class="obs_cancel"><-- Back to Dashboard </button>
 			</form>
 	</div>
@@ -118,7 +112,7 @@ $("#obs_options").validate({
 <?php } else {  // recording in progress, display details  
 // var_dump($_SESSION['recording']);
 ?>
-	<div id="right"> <button class="obs_disable"><-- Back to Dashboard </button>
+	<div id="right_align"> <button class="obs_disable"><-- Back to Dashboard </button>
 	</div>
 
 	<div id="selector" > 
@@ -136,14 +130,34 @@ $("#obs_options").validate({
 ?>
 
 	<div id="dashboard">
+<div id="left">
+	<div id="top">
 		<div id="video">
-			Webcam: <br> <img src="images/video_recorder.png" />
+			Webcam: <br> <img src="images/video_recorder.png" />			
 		</div> <!-- video -->
+
 		<div id="comments">
 			Comments: <br> <br>			
-			00:00 start recording
+			00:00 start recording			
 		</div> <!-- comments -->	
-		
+	</div> <!-- top -->
+	
+	<div id="bottom">
+		<div id="free_comment">
+		Additional Comments:<br>
+		<form id="freeComment" method="post" action="handlers/comment_handler">
+		<textarea id="comment_text" name="comment_text" form="freeComment" placeholder="Type additional comments here."> </textarea>
+		<input type="hidden" name="comment_value" value="0-0"/> 
+<?php				// if recording in progress, display button to submit comment
+			if ($_SESSION['recording']['activated']) { 	?>
+				<button id="freeComment">Comment</button>
+			<?php }  // end if  ?>
+		</form>
+		</div> <!-- free_comment -->
+
+	</div> <!-- bottom -->
+</div>  <!-- left -->
+<div id="right">
 	<div id="domain_selector">
 	Domains of Observation
 		<ul class="tabmenu">
@@ -163,16 +177,7 @@ $("#obs_options").validate({
 			<!--  load behavior_selector.php here with loadDomain script -->
 		</div>
 		</div> <!-- domain_selector div -->
-		<div id="free_comment">
-		<form method="post" action="handlers/comment_handler.php"> 
-		<input type="text" name="comment_text" placeholder="Type additional comments here" />
-		<input type="hidden" name="comment_value" value="0-0"/>
-<?php					// if recording in progress, display button to submit comment
-			if ($_SESSION['recording']['activated']) { 	?>
-				<button id="freeComment">Comment</button>
-			<?php }  // end if  ?>
-		</form>
-		</div> <!-- free_comment -->
+</div>  <!-- right -->
 
 	</div> <!-- dashboard -->
 

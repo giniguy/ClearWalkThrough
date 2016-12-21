@@ -298,6 +298,27 @@ label.columnright
 	min-width: 700px;
 }
 
+#left {
+	float: left;
+	width: 49%;
+	height: 500px;
+}
+
+#top {
+	float: left;
+	width: 99%;
+}
+
+#bottom {
+	float: left;
+	width: 99%;
+}
+
+#right {
+	float: right;
+	width: 49%;
+}
+
 .listhead {
 	text-align: center;
 	padding: 7px 0px;  
@@ -332,7 +353,6 @@ label.columnright
 	background-color: #afafaf;
 }
 
-}
 .menutable {
 	width: 100%;
 	margin-bottom: 15px;
@@ -348,13 +368,20 @@ label.columnright
 #video {
 	float: left;
 	width: 375px;
-	height: 600px;
+	height: 300px;
 	overflow: auto;
+}
+
+#free_comment {
+	float: right;
+	width: 99%;
+	height: 80px;
+	margin-top:10px;
 }
 
 #comments {
 	float: left;
-	width: 20%;
+	width: 50%;
 	height: 250px;
 	border: 1px solid #5f5f5f;
 	overflow-y: scroll;
@@ -378,7 +405,7 @@ label.columnright
 
 #domain_selector {
 	float: left;
-	width: 45%;
+	width: 95%;
 	margin: 10px 20px;
 }
 
@@ -387,8 +414,13 @@ label.columnright
 	margin: 10px 20px;
 }
 
-#right {
+#right_align {
 	text-align: right;
+}
+
+#comment_text {
+	height: 125px;
+	width: 60%;
 }
 
 .domain {

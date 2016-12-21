@@ -10,9 +10,23 @@ $dao = new dao;
 $behaviorID = $_GET['behaviorID'];
 ?>
 <html>
+<head>
+	<script>
+	$(document).ready(function() {
+		$("#selectComment").click(function() {
+			var comment2post = $("#comment_value").val();
+			$.post("handlers/comment_handler.php", comment_value:comment2post), 
+				function(response,status){
+					alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);
+			}
+		}
+	);	
+	});
+	</script>
+</head>
 <div class="behavior2 comment_display">
 	Rating
-	<form id="obs_comments" method="post" action="handlers/comment_handler.php">
+	<form id="obs_comments" method="post" action="handlers/comment_handler">
 	<table>
 		<?php // get comment details from db based on behavior
 		$comments = $dao -> getComments($behaviorID);

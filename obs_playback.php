@@ -25,7 +25,7 @@ $dao = new dao;
 </div> <!-- header -->
 
 <div class="content">
-	<div id="right"> <form method="post" action="dashboard.php">
+	<div id="right_align"> <form method="post" action="dashboard.php">
 			<button class="obs_cancel"><-- Back to Dashboard </button>
 			</form>
 		</div>
