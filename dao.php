@@ -10,12 +10,12 @@ private $pass = "DB_login"; */
   // connection for heroku database
 private $host = "us-cdbr-iron-east-04.cleardb.net";
 private $db = "heroku_912aebf8b73e1cb";
-private $user = "b318bad12b27a3";
-private $pass = "9f921efe";
+// private $user = getenv('DB_USERNAME');
+// private $pass = getenv('DB_PASSWORD');
 
 
 public function getConnection () {
-	return new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass);
+	return new PDO("mysql:host={$this->host};dbname={$this->db}", getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
 }  //end getConnection
 
 public function cleanText ($string) {
