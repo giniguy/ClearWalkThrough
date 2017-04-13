@@ -10,8 +10,8 @@ private $pass = "DB_login"; */
   // connection for heroku database
 private $host = "us-cdbr-iron-east-04.cleardb.net";
 private $db = "heroku_912aebf8b73e1cb";
-private $user = "b318bad12b27a3";
-private $pass = "9f921efe";
+private $user = $_ENV["DB_USERNAME"];
+private $pass = $_ENV["DB_PASSWORD"];
 
 
 public function getConnection () {
